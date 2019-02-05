@@ -1,9 +1,9 @@
-# Powershell Wallpaper Prank
-Powershell command to change wallpaper on Windows 10 from the run command all less than 260 characters
+# PowerShell Wallpaper Prank
+PowerShell command to change wallpaper on Windows 10 from the run command all less than 260 characters
 
-Improving on the Hak5 video One Line Powershell Wallpaper Prank - Hak5 2502
+Improving on the Hak5 video One Line PowerShell Wallpaper Prank - Hak5 2502
 
-[![One Line Powershell Wallpaper Prank - Hak5 2502](https://img.youtube.com/vi/f3C58OKOsuo/0.jpg)](https://www.youtube.com/watch?v=f3C58OKOsuo)
+[![One Line PowerShell Wallpaper Prank - Hak5 2502](https://img.youtube.com/vi/f3C58OKOsuo/0.jpg)](https://www.youtube.com/watch?v=f3C58OKOsuo)
 
 The original code which is 253 characters
 ```
@@ -38,16 +38,30 @@ Finally, the command ```RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1
 
 ```1..60|%{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}```
 
-### Things which need improvement
+### Improvement allowing HTTPS URLs
 Currently this does not allow locations which are serving images over https which would bypass some content filtering systems due to a
 
 ```iwr : The request was aborted: Could not create SSL/TLS secure channel.```
 
-error, this can be fixed by running the follwoing command prior to executing the rest 
+error, this can be fixed by running the following command prior to executing the rest
 
 ```
 [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
 ```
-but this is an extra 78 characters which would put it over the 260 character limit. 
+but this is an extra 78 characters which would put it over the 260 character limit.
 
-I am aware that I could make this a 2 stage payloaad or load the script externally, but as many organisations protect against remote powershell scripts and I want this to execute entirely within the Run dialog, I am currently looking for an alias which will ideally perform this in less than 20 characters.
+After a bit of investigation I found the following pieces of information
+* ```[Net.ServicePointManager]::SecurityProtocol``` is an enum so it can be declared as a string "tls12"
+* The url for iwr -Uri does not require the protocol  so that can be stripped out saving 7 characters (or 8 characters in a https url).
+
+This still makes the command too long (283 characters), but that is very close to what we need, so if you are willing to sacrifice the random name.
+
+```
+powershell -w h -c "[Net.ServicePointManager]::SecurityProtocol='tls12';$a=$ENV:TMP+'a.jpg';iwr -Uri h4k.cc/b.jpg -OutFile $($a);sp 'HKCU:Control Panel\Desktop' WallPaper $($a);1..60|%{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}"
+```
+
+it drops to 258 characters.
+
+### Other Notes
+
+I am aware that I could make this a 2 stage payload or load the script externally, but as many organizations protect against remote PowerShell scripts and I want this to execute entirely within the Run dialog, I am currently looking for an alias which will ideally perform this in less than 20 characters.
