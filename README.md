@@ -26,11 +26,11 @@ The next secion creates a variable of a file in the user temp directory with a r
 
 ```$a=$ENV:TMP+$([guid]::NewGuid())+'.jpg';```
 
-The next secion downloads the image from the remote site using an alias of Invoke-WebRequest and stores it in the temp location you just declared
+The next secion downloads the image from the remote site using an alias of ```Invoke-WebRequest``` and stores it in the temp location you just declared
 
 ```iwr -Uri http://h4k.cc/b.jpg -OutFile $($a);```
 
-Then set the Registry wallpaper item property using the 'sp' alias of 'Set-ItemProperty' to the wallpaper
+Then set the Registry wallpaper item property using the ```sp``` alias of ```Set-ItemProperty``` to the wallpaper
 
 ```sp 'HKCU:Control Panel\Desktop' WallPaper $($a);```
 
