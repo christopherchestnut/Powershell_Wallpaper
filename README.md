@@ -1,4 +1,4 @@
-# Powershell_Wallpaper
+# Powershell Wallpaper Prank
 Powershell command to change wallpaper on Windows 10 from the run command all less than 260 characters
 
 Improving on the Hak5 video One Line Powershell Wallpaper Prank - Hak5 2502
